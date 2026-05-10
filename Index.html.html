@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veer Global Education — MBBS Abroad Consultancy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #112040;
+    --blue: #1a4fa0;
+    --gold: #c8973a;
+    --gold-light: #e8b84b;
+    --cream: #faf8f3;
+    --white: #ffffff;
+    --text-dark: #1a1f2e;
+    --text-mid: #4a5568;
+    --text-light: #8a95a8;
+    --border: rgba(200,151,58,0.2);
+    --shadow: 0 20px 60px rgba(10,22,40,0.12);
+    --error: #e05555;
+    --success: #2eb87e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ══════════════════════════════════════
+     NAV
+  ══════════════════════════════════════ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    background: rgba(10,22,40,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,151,58,0.15);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    appearance: none;
+  }
+
+  .nav-logo-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700;
+    color: var(--navy);
+    font-family: 'Playfair Display', serif;
+  }
+
+  .nav-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 600;
+    color: var(--white); line-height: 1.2;
+  }
+
+  .nav-logo-text span {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy) !important;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,151,58,0.4) !important; color: var(--navy) !important; }
+
+  .nav-login-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.75) !important;
+    padding: 9px 20px;
+    border-radius: 6px;
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s, color 0.2s !important;
+  }
+
+  .nav-login-btn::after { display: none !important; }
+  .nav-login-btn:hover { border-color: rgba(200,151,58,0.5) !important; color: var(--gold) !important; }
+
+
+  .user-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy) !important;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    border: none;
+    box-shadow: 0 6px 18px rgba(200,151,58,0.35);
+  }
+
+  .user-circle:hover {
+    color: var(--navy) !important;
+    transform: translateY(-1px);
+  }
+
+  /* ══════════════════════════════════════
+     MODAL OVERLAY
+  ══════════════════════════════════════ */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(5,12,25,0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Background effects inside modal */
+  .modal-bg-mesh {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 20%, rgba(26,79,160,0.3) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 50% at 10% 80%, rgba(200,151,58,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .modal-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,151,58,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,151,58,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  /* Auth container inside modal */
+  .auth-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 480px;
+    transform: translateY(30px);
+    transition: transform 0.4s cubic-bezier(0.34,1.2,0.64,1);
+  }
+
+  .modal-overlay.open .auth-container {
+    transform: translateY(0);
+  }
+
+  /* Close button */
+  .modal-close {
+    position: absolute;
+    top: -12px; right: -12px;
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    color: rgba(255,255,255,0.6);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    z-index: 20;
+  }
+
+  .modal-close:hover { background: rgba(255,255,255,0.15); color: var(--white); }
+
+  /* Logo */
+  .auth-logo {
+    text-align: center;
+    margin-bottom: 28px;
+    display: block;
+  }
+
+  .logo-icon {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--navy);
+    margin: 0 auto 12px;
+    box-shadow: 0 8px 32px rgba(200,151,58,0.35);
+  }
+
+  .logo-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 600;
+    color: var(--white);
+    display: block; margin-bottom: 3px;
+  }
+
+  .logo-tagline {
+    font-size: 11px; color: var(--gold);
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+  }
+
+  /* Card */
+  .auth-card {
+    background: rgba(10,22,40,0.92);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 40px 40px 32px;
+    backdrop-filter: blur(24px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .auth-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 24px; padding: 1px;
+    background: linear-gradient(135deg, rgba(200,151,58,0.25), transparent 50%, rgba(26,79,160,0.15));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Tabs */
+  .auth-tabs {
+    display: flex;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px; padding: 4px;
+    margin-bottom: 32px; position: relative;
+  }
+
+  .tab-btn {
+    flex: 1; padding: 10px;
+    border: none; background: transparent;
+    color: rgba(255,255,255,0.45);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 600;
+    cursor: pointer; border-radius: 9px;
+    transition: color 0.3s;
+    position: relative; z-index: 1;
+  }
+
+  .tab-btn.active { color: var(--navy); }
+
+  .tab-slider {
+    position: absolute;
+    top: 4px; bottom: 4px;
+    width: calc(50% - 4px);
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 9px;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    left: 4px;
+  }
+
+  .tab-slider.register { transform: translateX(calc(100%)); }
+
+  /* Form panels */
+  .form-panel { display: none; }
+  .form-panel.active { display: block; }
+
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px; font-weight: 600;
+    color: var(--white); margin-bottom: 5px;
+  }
+
+  .form-subtitle {
+    font-size: 13px; color: rgba(255,255,255,0.38);
+    margin-bottom: 24px; line-height: 1.6;
+  }
+
+  /* Input groups */
+  .input-group { margin-bottom: 16px; position: relative; }
+
+  .input-group label {
+    display: block;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 7px;
+  }
+
+  .input-wrap { position: relative; }
+
+  .input-icon {
+    position: absolute; left: 14px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px; pointer-events: none;
+  }
+
+  .input-group input {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 12px 14px 12px 42px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; outline: none;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  }
+
+  .input-group input::placeholder { color: rgba(255,255,255,0.18); }
+
+  .input-group input:focus {
+    border-color: rgba(200,151,58,0.5);
+    background: rgba(200,151,58,0.05);
+    box-shadow: 0 0 0 3px rgba(200,151,58,0.08);
+  }
+
+  /* Password toggle */
+  .pwd-toggle {
+    position: absolute; right: 12px; top: 50%;
+    transform: translateY(-50%);
+    background: none; border: none;
+    color: rgba(255,255,255,0.3);
+    cursor: pointer; font-size: 15px; padding: 4px;
+    transition: color 0.2s;
+  }
+
+  .pwd-toggle:hover { color: rgba(255,255,255,0.7); }
+
+  /* Two-col row */
+  .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* Forgot */
+  .forgot-link {
+    display: block; text-align: right;
+    font-size: 12px; color: var(--gold);
+    text-decoration: none;
+    margin-top: -8px; margin-bottom: 18px;
+    transition: color 0.2s;
+  }
+
+  .forgot-link:hover { color: var(--gold-light); }
+
+  /* Submit button */
+  .auth-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy); border: none;
+    border-radius: 10px; padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.3px; margin-top: 4px;
+    position: relative; overflow: hidden;
+  }
+
+  .auth-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(200,151,58,0.4); }
+  .auth-btn:active { transform: translateY(0); }
+  .auth-btn .btn-text { transition: opacity 0.2s; }
+  .auth-btn .btn-loader { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
+  .auth-btn.loading .btn-text { opacity: 0; }
+  .auth-btn.loading .btn-loader { opacity: 1; }
+
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(10,22,40,0.3);
+    border-top-color: var(--navy);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Divider */
+  .divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
+  .divider span { font-size: 12px; color: rgba(255,255,255,0.22); white-space: nowrap; }
+
+  /* Google btn */
+  .google-btn {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 12px;
+    color: rgba(255,255,255,0.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    transition: background 0.2s, border-color 0.2s;
+    text-decoration: none;
+  }
+
+  .google-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
+
+  .google-icon {
+    width: 16px; height: 16px;
+    background: conic-gradient(from 0deg, #EA4335 0deg 90deg, #FBBC05 90deg 180deg, #34A853 180deg 270deg, #4285F4 270deg 360deg);
+    border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* Terms */
+  .terms-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 18px; }
+  .terms-check input[type="checkbox"] { width: 15px; height: 15px; margin-top: 2px; accent-color: var(--gold); flex-shrink: 0; cursor: pointer; }
+  .terms-check label { font-size: 12px; color: rgba(255,255,255,0.38); line-height: 1.6; cursor: pointer; }
+  .terms-check label a { color: var(--gold); text-decoration: none; }
+
+  /* Strength bar */
+  .strength-bar { display: flex; gap: 4px; margin-top: 7px; }
+  .strength-seg { flex: 1; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.07); transition: background 0.3s; }
+  .strength-label { font-size: 11px; color: rgba(255,255,255,0.28); margin-top: 4px; transition: color 0.3s; }
+
+  /* Switch prompt */
+  .switch-prompt { text-align: center; margin-top: 18px; font-size: 13px; color: rgba(255,255,255,0.32); }
+  .switch-prompt button { background: none; border: none; color: var(--gold); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; padding: 0; transition: color 0.2s; }
+  .switch-prompt button:hover { color: var(--gold-light); }
+
+  /* Toast */
+  .toast {
+    position: fixed; top: 24px; left: 50%;
+    transform: translateX(-50%) translateY(-80px);
+    background: rgba(46,184,126,0.15);
+    border: 1px solid rgba(46,184,126,0.3);
+    border-radius: 12px; padding: 13px 22px;
+    color: var(--white); font-size: 14px; font-weight: 500;
+    display: flex; align-items: center; gap: 10px;
+    z-index: 9999;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    backdrop-filter: blur(12px);
+    white-space: nowrap;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.error { background: rgba(224,85,85,0.15); border-color: rgba(224,85,85,0.3); }
+
+  /* ══════════════════════════════════════
+     HERO
+  ══════════════════════════════════════ */
+  #home {
+    min-height: 100vh;
+    background: var(--navy);
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden; padding-top: 72px;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 40%, rgba(26,79,160,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,151,58,0.12) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(200,151,58,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,151,58,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto;
+    padding: 80px 40px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center; width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(200,151,58,0.12);
+    border: 1px solid rgba(200,151,58,0.3);
+    border-radius: 100px; padding: 6px 16px;
+    margin-bottom: 28px;
+    font-size: 12px; font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--gold); border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 4vw, 58px); font-weight: 700;
+    color: var(--white); line-height: 1.15; margin-bottom: 24px;
+  }
+
+  .hero-title .accent { color: var(--gold); }
+
+  .hero-desc {
+    font-size: 16px; color: rgba(255,255,255,0.65);
+    line-height: 1.8; margin-bottom: 40px; max-width: 480px;
+  }
+
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy); padding: 14px 32px;
+    border-radius: 8px; font-weight: 600; font-size: 15px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(200,151,58,0.45); }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.06); color: var(--white);
+    padding: 14px 32px; border-radius: 8px;
+    font-weight: 500; font-size: 15px; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: background 0.2s, border-color 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
+
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 52px;
+    padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--gold); line-height: 1; margin-bottom: 4px;
+  }
+
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: 0.5px; }
+
+  .hero-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 40px;
+    backdrop-filter: blur(20px); position: relative;
+  }
+
+  .hero-card::before {
+    content: ''; position: absolute; inset: -1px;
+    border-radius: 20px; padding: 1px;
+    background: linear-gradient(135deg, rgba(200,151,58,0.3), transparent, rgba(26,79,160,0.2));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude; pointer-events: none;
+  }
+
+  .hero-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--white); margin-bottom: 24px; }
+
+  .country-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+
+  .country-pill {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px;
+    transition: background 0.2s, border-color 0.2s; cursor: pointer;
+  }
+
+  .country-pill:hover { background: rgba(200,151,58,0.1); border-color: rgba(200,151,58,0.3); }
+  .country-flag { font-size: 22px; }
+  .country-name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); }
+  .country-info { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+  /* ══════════════════════════════════════
+     SECTION COMMON
+  ══════════════════════════════════════ */
+  .section-wrap { max-width: 1200px; margin: 0 auto; padding: 100px 40px; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(30px, 3vw, 44px); font-weight: 700; color: var(--text-dark); line-height: 1.2; margin-bottom: 16px; }
+  .section-sub { font-size: 16px; color: var(--text-mid); line-height: 1.7; max-width: 560px; }
+  .section-header { margin-bottom: 60px; }
+
+  /* ══════════════════════════════════════
+     WHY US
+  ══════════════════════════════════════ */
+  #why { background: var(--white); }
+
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+
+  .why-card {
+    background: var(--cream);
+    border: 1px solid rgba(200,151,58,0.1);
+    border-radius: 16px; padding: 36px 32px;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    position: relative; overflow: hidden;
+  }
+
+  .why-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+
+  .why-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: rgba(200,151,58,0.25); }
+  .why-card:hover::before { transform: scaleX(1); }
+
+  .why-icon {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, rgba(200,151,58,0.15), rgba(200,151,58,0.05));
+    border-radius: 14px; display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 24px;
+  }
+
+  .why-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--text-dark); margin-bottom: 12px; }
+  .why-card p { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+
+  /* ══════════════════════════════════════
+     COUNTRIES
+  ══════════════════════════════════════ */
+  #countries { background: var(--cream); }
+
+  .countries-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .country-card {
+    background: var(--white); border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;
+  }
+
+  .country-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+  .country-card-top {
+    padding: 32px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    display: flex; align-items: center; gap: 16px;
+  }
+
+  .country-emoji { font-size: 48px; line-height: 1; }
+  .country-card-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .country-card-tag { font-size: 11px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
+  .country-card-body { padding: 24px 32px; }
+
+  .country-feat { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-mid); margin-bottom: 10px; }
+  .country-feat::before { content: ''; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+  /* ══════════════════════════════════════
+     PROCESS
+  ══════════════════════════════════════ */
+  #process { background: var(--white); }
+
+  .process-steps {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 0; position: relative;
+  }
+
+  .process-steps::before {
+    content: ''; position: absolute;
+    top: 32px; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--blue)); z-index: 0;
+  }
+
+  .process-step { text-align: center; padding: 0 12px; position: relative; z-index: 1; }
+
+  .step-num {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--gold);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+
+  .step-title { font-weight: 600; font-size: 14px; color: var(--text-dark); margin-bottom: 8px; }
+  .step-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+
+  /* ══════════════════════════════════════
+     ADMISSION FORM
+  ══════════════════════════════════════ */
+  #admission { background: var(--navy); }
+
+  .form-section { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+
+  .form-left .section-label { color: var(--gold); }
+  .form-left .section-title { color: var(--white); }
+  .form-left .section-sub { color: rgba(255,255,255,0.55); }
+
+  .form-promise { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
+
+  .promise-item { display: flex; align-items: center; gap: 14px; color: rgba(255,255,255,0.7); font-size: 14px; }
+
+  .promise-icon {
+    width: 36px; height: 36px;
+    background: rgba(200,151,58,0.1);
+    border: 1px solid rgba(200,151,58,0.2);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+
+  .form-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 48px;
+    backdrop-filter: blur(20px);
+  }
+
+  .form-card h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--white); margin-bottom: 32px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-group { margin-bottom: 18px; }
+
+  .form-group label {
+    display: block; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 13px 16px;
+    color: var(--white); font-family: 'DM Sans', sans-serif;
+    font-size: 14px; transition: border-color 0.2s, background 0.2s;
+    outline: none; appearance: none;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: rgba(200,151,58,0.5); background: rgba(200,151,58,0.05); }
+
+  .form-group select option { background: var(--navy); color: var(--white); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy); border: none; border-radius: 10px; padding: 16px;
+    font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 8px; letter-spacing: 0.3px;
+  }
+
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(200,151,58,0.4); }
+
+  /* ══════════════════════════════════════
+     CONTACT
+  ══════════════════════════════════════ */
+  #contact { background: var(--cream); }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+
+  .contact-card { background: var(--white); border-radius: 20px; padding: 48px; box-shadow: 0 4px 40px rgba(0,0,0,0.06); }
+  .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 8px; color: var(--text-dark); }
+  .contact-card p.sub { font-size: 14px; color: var(--text-light); margin-bottom: 36px; }
+
+  .contact-item { display: flex; align-items: center; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .contact-item:last-child { border-bottom: none; }
+
+  .contact-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .ci-phone { background: rgba(26,79,160,0.08); }
+  .ci-email { background: rgba(200,151,58,0.1); }
+  .ci-wa { background: rgba(37,211,102,0.1); }
+
+  .contact-detail-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 3px; }
+  .contact-detail-val { font-size: 15px; font-weight: 500; color: var(--text-dark); }
+
+  .map-card { background: var(--white); border-radius: 20px; padding: 48px; box-shadow: 0 4px 40px rgba(0,0,0,0.06); }
+  .map-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 24px; color: var(--text-dark); }
+
+  .wa-btn {
+    display: flex; align-items: center; gap: 12px;
+    background: #25D366; color: var(--white); text-decoration: none;
+    padding: 16px 28px; border-radius: 12px; font-weight: 600; font-size: 15px;
+    margin-top: 28px; transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .wa-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37,211,102,0.35); }
+
+  .countries-served { margin-top: 28px; }
+  .countries-served h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-light); font-weight: 600; margin-bottom: 14px; }
+
+  .flag-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .flag-chip { background: var(--cream); border: 1px solid rgba(0,0,0,0.06); border-radius: 8px; padding: 8px 14px; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+
+  /* ══════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════ */
+  footer { background: var(--navy); padding: 60px 40px 28px; }
+
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px;
+    padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 28px;
+  }
+
+  .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.8; margin-top: 16px; max-width: 320px; }
+
+  .footer-col h4 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 20px; }
+  .footer-col a { display: block; color: rgba(255,255,255,0.45); text-decoration: none; font-size: 14px; margin-bottom: 12px; transition: color 0.2s; }
+  .footer-col a:hover { color: rgba(255,255,255,0.85); }
+
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.25); }
+
+  /* Hero animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * { animation: fadeUp 0.7s ease forwards; opacity: 0; }
+  .hero-badge { animation-delay: 0.1s; }
+  .hero-title { animation-delay: 0.25s; }
+  .hero-desc { animation-delay: 0.4s; }
+  .hero-btns { animation-delay: 0.55s; }
+  .hero-stats { animation-delay: 0.7s; }
+  .hero-card { animation: fadeUp 0.7s 0.4s ease forwards; opacity: 0; }
+
+
+  /* ══════════════════════════════════════
+     USER PROFILE POPUP
+  ══════════════════════════════════════ */
+  .profile-box {
+    position: fixed;
+    top: 86px;
+    right: 40px;
+    width: 300px;
+    background: var(--white);
+    color: var(--text-dark);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.25);
+    z-index: 10000;
+    display: none;
+    border: 1px solid rgba(200,151,58,0.25);
+  }
+
+  .profile-box.show { display: block; }
+
+  .profile-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .profile-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .profile-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .profile-sub {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+
+  .profile-row {
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    background: var(--cream);
+  }
+
+  .profile-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-light);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .profile-value {
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 600;
+    word-break: break-word;
+  }
+
+  .profile-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .profile-actions button {
+    border: none;
+    border-radius: 10px;
+    padding: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .profile-apply-btn {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+  }
+
+  .profile-logout-btn {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  @media (max-width: 520px) {
+    .profile-box {
+      right: 18px;
+      left: 18px;
+      width: auto;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div id="toast" class="toast">✓ Done</div>
+
+<!-- USER PROFILE POPUP -->
+<div id="profileBox" class="profile-box">
+  <div class="profile-head">
+    <div class="profile-avatar" id="profileAvatar">V</div>
+    <div>
+      <div class="profile-title">User Profile</div>
+      <div class="profile-sub">Veer Global Education</div>
+    </div>
+  </div>
+
+  <div class="profile-row">
+    <div class="profile-label">Name</div>
+    <div class="profile-value" id="profileName">-</div>
+  </div>
+
+  <div class="profile-row">
+    <div class="profile-label">Email</div>
+    <div class="profile-value" id="profileEmail">-</div>
+  </div>
+
+  <div class="profile-row">
+    <div class="profile-label">Phone</div>
+    <div class="profile-value" id="profilePhone">-</div>
+  </div>
+
+  <div class="profile-actions">
+    <button class="profile-apply-btn" onclick="goToAdmission()">Apply</button>
+    <button class="profile-logout-btn" onclick="logoutUser()">Logout</button>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     LOGIN / REGISTER MODAL
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="authModal" onclick="handleOverlayClick(event)">
+  <div class="modal-bg-mesh"></div>
+  <div class="modal-bg-grid"></div>
+
+  <div class="auth-container">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <!-- Logo -->
+    <div class="auth-logo">
+      <div class="logo-icon">V</div>
+      <span class="logo-name">Veer Global Education</span>
+      <span class="logo-tagline">MBBS Abroad Consultancy</span>
+    </div>
+
+    <!-- Card -->
+    <div class="auth-card">
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <div class="tab-slider" id="tabSlider"></div>
+        <button class="tab-btn active" id="loginTab" onclick="switchTab('login')">Sign In</button>
+        <button class="tab-btn" id="registerTab" onclick="switchTab('register')">Register</button>
+      </div>
+
+      <!-- LOGIN PANEL -->
+      <div class="form-panel active" id="loginPanel">
+        <div class="form-title">Welcome Back</div>
+        <div class="form-subtitle">Sign in to track your application and access counselling resources.</div>
+
+        <div class="input-group">
+          <label>Email Address</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉️</span>
+            <input type="email" id="loginEmail" placeholder="you@email.com">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="loginPassword" placeholder="Enter your password">
+            <button class="pwd-toggle" onclick="togglePwd('loginPassword', this)">👁</button>
+          </div>
+        </div>
+
+        <a href="#" class="forgot-link">Forgot password?</a>
+
+        <button class="auth-btn" id="loginBtn" onclick="handleLogin()">
+          <span class="btn-text">Sign In →</span>
+          <span class="btn-loader"><div class="spinner"></div></span>
+        </button>
+
+        <div class="divider"><span>or continue with</span></div>
+
+        <button type="button" class="google-btn" onclick="handleGoogleLogin()">
+          <div class="google-icon"></div>
+          Continue with Google
+        </button>
+      </div>
+
+      <!-- REGISTER PANEL -->
+      <div class="form-panel" id="registerPanel">
+        <div class="form-title">Create Account</div>
+        <div class="form-subtitle">Register to apply for MBBS abroad and get personalised counselling.</div>
+
+        <div class="input-row">
+          <div class="input-group">
+            <label>First Name</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="regFirst" placeholder="First name">
+            </div>
+          </div>
+          <div class="input-group">
+            <label>Last Name</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="regLast" placeholder="Last name">
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Email Address</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉️</span>
+            <input type="email" id="regEmail" placeholder="you@email.com">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Phone Number</label>
+          <div class="input-wrap">
+            <span class="input-icon">📞</span>
+            <input type="tel" id="regPhone" placeholder="+91 XXXXX XXXXX">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="regPassword" placeholder="Create a strong password" oninput="checkStrength(this.value)">
+            <button class="pwd-toggle" onclick="togglePwd('regPassword', this)">👁</button>
+          </div>
+          <div class="strength-bar">
+            <div class="strength-seg" id="seg1"></div>
+            <div class="strength-seg" id="seg2"></div>
+            <div class="strength-seg" id="seg3"></div>
+            <div class="strength-seg" id="seg4"></div>
+          </div>
+          <div class="strength-label" id="strengthLabel">Enter a password</div>
+        </div>
+
+        <div class="terms-check">
+          <input type="checkbox" id="termsCheck">
+          <label for="termsCheck">
+            I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a> of Veer Global Education.
+          </label>
+        </div>
+
+        <button class="auth-btn" id="registerBtn" onclick="handleRegister()">
+          <span class="btn-text">Create Account →</span>
+          <span class="btn-loader"><div class="spinner"></div></span>
+        </button>
+
+        <div class="divider"><span>or continue with</span></div>
+
+        <button type="button" class="google-btn" onclick="handleGoogleLogin()">
+          <div class="google-icon"></div>
+          Sign up with Google
+        </button>
+      </div>
+
+      <!-- Switch prompt -->
+      <div class="switch-prompt" id="switchPrompt">
+        Don't have an account? <button onclick="switchTab('register')">Register free</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     NAV
+══════════════════════════════════════ -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon">V</div>
+    <div class="nav-logo-text">
+      Veer Global Education
+      <span>MBBS Abroad Consultancy</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#countries">Countries</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#" class="nav-cta" onclick="handleApplyNowClick(); return false;">Apply Now</a></li>
+    <li><button class="nav-login-btn" id="userAuthBtn" onclick="openModal('login')">Login / Register</button></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">Trusted MBBS Abroad Consultancy</div>
+      <h1 class="hero-title">
+        Your Journey to a<br>
+        <span class="accent">Global Medical</span><br>
+        Career Starts Here
+      </h1>
+      <p class="hero-desc">
+        We guide Indian students through every step — from university selection and applications to visa support and pre-departure counselling. Study MBBS at top-ranked universities abroad at a fraction of the cost.
+      </p>
+      <div class="hero-btns">
+        <a href="#" class="btn-primary" onclick="handleApplyNowClick(); return false;">Apply for MBBS Abroad →</a>
+        <a href="#countries" class="btn-secondary">Explore Countries</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Countries</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Visa Success</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">Free</div>
+          <div class="stat-label">Counselling</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <h3>Explore Destinations</h3>
+        <div class="country-grid">
+          <div class="country-pill"><span class="country-flag">🇷🇺</span><div><div class="country-name">Russia</div><div class="country-info">Top NMC-approved unis</div></div></div>
+          <div class="country-pill"><span class="country-flag">🇺🇿</span><div><div class="country-name">Uzbekistan</div><div class="country-info">Affordable & quality</div></div></div>
+          <div class="country-pill"><span class="country-flag">🇰🇿</span><div><div class="country-name">Kazakhstan</div><div class="country-info">WHO recognised</div></div></div>
+          <div class="country-pill"><span class="country-flag">🇰🇬</span><div><div class="country-name">Kyrgyzstan</div><div class="country-info">Low cost, high quality</div></div></div>
+          <div class="country-pill"><span class="country-flag">🇬🇪</span><div><div class="country-name">Georgia</div><div class="country-info">European standards</div></div></div>
+          <div class="country-pill"><span class="country-flag">🇵🇭</span><div><div class="country-name">Philippines</div><div class="country-info">English medium</div></div></div>
+        </div>
+        <button onclick="handleCounsellingClick()" class="btn-primary" style="width:100%; justify-content:center; border:none; cursor:pointer;">Get Free Counselling →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     WHY US
+══════════════════════════════════════ -->
+<section id="why">
+  <div class="section-wrap">
+    <div class="section-header">
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">A Partner You Can Trust<br>at Every Step</h2>
+      <p class="section-sub">We don't just give you admission — we give you a complete support system from day one to your first year of studies.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">🎓</div><h3>Expert University Selection</h3><p>We match your NEET score, budget, and preferences to the best-fit university — shortlisting from only NMC and WHO-approved institutions.</p></div>
+      <div class="why-card"><div class="why-icon">📋</div><h3>End-to-End Documentation</h3><p>Our team handles all document verification, attestation, translation, and submission — so you never miss a deadline or face a rejection.</p></div>
+      <div class="why-card"><div class="why-icon">✈️</div><h3>Visa & Travel Support</h3><p>We prepare your visa file, guide you through the interview process, and coordinate with embassies for a smooth approval experience.</p></div>
+      <div class="why-card"><div class="why-icon">💬</div><h3>Free Counselling</h3><p>Our experienced counsellors are available to answer every question — from course structure and fees to scholarships and career prospects.</p></div>
+      <div class="why-card"><div class="why-icon">🏠</div><h3>Pre-Departure Preparation</h3><p>We brief students on hostel arrangements, food, culture, and what to expect — so they arrive confident and prepared.</p></div>
+      <div class="why-card"><div class="why-icon">📞</div><h3>Ongoing Support</h3><p>Our relationship doesn't end at admission. We stay connected throughout your MBBS journey and are just a call away whenever you need us.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     COUNTRIES
+══════════════════════════════════════ -->
+<section id="countries">
+  <div class="section-wrap">
+    <div class="section-header">
+      <div class="section-label">Our Destinations</div>
+      <h2 class="section-title">Study MBBS in 6 Countries</h2>
+      <p class="section-sub">All partner universities are recognised by the National Medical Commission (NMC) of India and listed in the WHO World Directory.</p>
+    </div>
+    <div class="countries-grid">
+      <div class="country-card">
+        <div class="country-card-top"><div class="country-emoji">🇷🇺</div><div><div class="country-card-name">Russia</div><div class="country-card-tag">Most Popular</div></div></div>
+        <div class="country-card-body"><div class="country-feat">NMC-approved universities</div><div class="country-feat">6-year MBBS program</div><div class="country-feat">Affordable tuition & living costs</div><div class="country-feat">Large Indian student community</div></div>
+      </div>
+      <div class="country-card">
+        <div class="country-card-top"><div class="country-emoji">🇺🇿</div><div><div class="country-card-name">Uzbekistan</div><div class="country-card-tag">Budget Friendly</div></div></div>
+        <div class="country-card-body"><div class="country-feat">Modern university campuses</div><div class="country-feat">English-medium instruction</div><div class="country-feat">Low cost of living</div><div class="country-feat">Growing medical reputation</div></div>
+      </div>
+      <div class="country-card">
+        <div class="country-card-top"><div class="country-emoji">🇰🇿</div><div><div class="country-card-name">Kazakhstan</div><div class="country-card-tag">WHO Listed</div></div></div>
+        <div class="country-card-body"><div class="country-feat">Top-ranked CIS medical colleges</div><div class="country-feat">English & Russian medium</div><div class="country-feat">Modern clinical training</div><div class="country-feat">Safe and student-friendly cities</div></div>
+      </div>
+      <div class="country-card">
+        <div class="country-card-top"><div class="country-emoji">🇰🇬</div><div><div class="country-card-name">Kyrgyzstan</div><div class="country-card-tag">Low Cost</div></div></div>
+        <div class="country-card-body"><div class="country-feat">Lowest MBBS fees abroad</div><div class="country-feat">NMC-recognised colleges</div><div class="country-feat">Visa easily obtained</div><div class="country-feat">Peaceful study environment</div></div>
+      </div>
+      <div class="country-card">
+        <div class="country-card-top"><div class="country-emoji">🇬🇪</div><div><div class="country-card-name">Georgia</div><div class="country-card-tag">European Standards</div></div></div>
+        <div class="country-card-body"><div class="country-feat">European-level infrastructure</div><div class="country-feat">English-medium MBBS</div><div class="country-feat">Safe, tourist-friendly country</div><div class="country-feat">Strong clinical exposure</div></div>
+      </div>
+      <div class="country-card">
+        <div class="country-card-top"><div class="country-emoji">🇵🇭</div><div><div class="country-card-name">Philippines</div><div class="country-card-tag">English Medium</div></div></div>
+        <div class="country-card-body"><div class="country-feat">100% English-medium teaching</div><div class="country-feat">US-modelled curriculum</div><div class="country-feat">High-quality clinical training</div><div class="country-feat">USMLE pathway available</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PROCESS
+══════════════════════════════════════ -->
+<section id="process">
+  <div class="section-wrap">
+    <div class="section-header" style="text-align:center;">
+      <div class="section-label" style="text-align:center;">How It Works</div>
+      <h2 class="section-title">From Enquiry to Enrolment<br>in 5 Simple Steps</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step"><div class="step-num">1</div><div class="step-title">Free Counselling</div><div class="step-desc">Submit your enquiry and speak with our expert counsellors.</div></div>
+      <div class="process-step"><div class="step-num">2</div><div class="step-title">University Shortlisting</div><div class="step-desc">We match you to the best universities based on your profile.</div></div>
+      <div class="process-step"><div class="step-num">3</div><div class="step-title">Application & Offer</div><div class="step-desc">We submit your application and secure your admission offer letter.</div></div>
+      <div class="process-step"><div class="step-num">4</div><div class="step-title">Visa Processing</div><div class="step-desc">Complete document preparation and visa application support.</div></div>
+      <div class="process-step"><div class="step-num">5</div><div class="step-title">Travel & Onboarding</div><div class="step-desc">Pre-departure briefing and smooth arrival coordination.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     ADMISSION FORM
+══════════════════════════════════════ -->
+<section id="admission">
+  <div class="section-wrap">
+    <div class="form-section">
+      <div class="form-left">
+        <div class="section-label">Apply Now</div>
+        <h2 class="section-title" style="color:var(--white);">Start Your MBBS<br>Abroad Application</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.55);">Fill out the form and our counsellor will contact you within 24 hours with a personalised plan.</p>
+        <div class="form-promise">
+          <div class="promise-item"><div class="promise-icon">🔒</div>Your information is 100% confidential</div>
+          <div class="promise-item"><div class="promise-icon">📞</div>Counsellor calls back within 24 hours</div>
+          <div class="promise-item"><div class="promise-icon">💸</div>Completely free consultation, no charges</div>
+          <div class="promise-item"><div class="promise-icon">🎓</div>Only NMC & WHO approved universities</div>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>Admission Enquiry Form</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name"></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 XXXXX XXXXX"></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@email.com"></div>
+        <div class="form-row">
+          <div class="form-group"><label>NEET Score</label><input type="number" placeholder="e.g. 450"></div>
+          <div class="form-group"><label>12th Percentage</label><input type="text" placeholder="e.g. 75%"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Preferred Country</label>
+            <select>
+              <option value="">Select Country</option>
+              <option>Russia</option><option>Uzbekistan</option><option>Kazakhstan</option>
+              <option>Kyrgyzstan</option><option>Georgia</option><option>Philippines</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Passport Status</label>
+            <select>
+              <option value="">Select Status</option>
+              <option>Available</option><option>Applied</option><option>Not Available</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Budget (in INR)</label><input type="text" placeholder="e.g. 30-40 lakhs total"></div>
+        <div class="form-group"><label>Message (Optional)</label><textarea placeholder="Tell us anything specific — questions, concerns, preferences..."></textarea></div>
+        <button class="submit-btn" onclick="showToast('Thank you! Our counsellor will contact you soon.', false)">Submit Application →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CONTACT
+══════════════════════════════════════ -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="section-header">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">We're Here to Help</h2>
+      <p class="section-sub">Reach out through any channel — we respond quickly and our counselling is always free.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Contact Information</h3>
+        <p class="sub">Veer Global Education — MBBS Abroad Admission Support</p>
+        <div class="contact-item">
+          <div class="contact-icon ci-phone">📞</div>
+          <div><div class="contact-detail-label">Phone</div><div class="contact-detail-val">+91 7708148108</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon ci-email">✉️</div>
+          <div><div class="contact-detail-label">Email</div><div class="contact-detail-val">veerag433@gmail.com</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon ci-wa">💬</div>
+          <div><div class="contact-detail-label">WhatsApp</div><div class="contact-detail-val">+91 7708148108</div></div>
+        </div>
+        <a href="https://wa.me/917708148108" target="_blank" class="wa-btn"><span>💬</span> Chat on WhatsApp Now</a>
+      </div>
+      <div class="map-card">
+        <h3>Countries We Serve</h3>
+        <p style="font-size:14px; color:var(--text-mid); margin-bottom:24px; line-height:1.7;">We place students in top NMC-approved medical universities across 6 countries. All admissions are direct — no middlemen, no hidden charges.</p>
+        <div class="countries-served">
+          <h4>Available Destinations</h4>
+          <div class="flag-row">
+            <div class="flag-chip">🇷🇺 Russia</div>
+            <div class="flag-chip">🇺🇿 Uzbekistan</div>
+            <div class="flag-chip">🇰🇿 Kazakhstan</div>
+            <div class="flag-chip">🇰🇬 Kyrgyzstan</div>
+            <div class="flag-chip">🇬🇪 Georgia</div>
+            <div class="flag-chip">🇵🇭 Philippines</div>
+          </div>
+        </div>
+        <div style="margin-top:36px; padding:24px; background:var(--cream); border-radius:14px; border:1px solid rgba(200,151,58,0.15);">
+          <div style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-light); margin-bottom:8px;">Office Hours</div>
+          <div style="font-size:15px; font-weight:500; color:var(--text-dark);">Mon – Sat, 9:00 AM – 7:00 PM IST</div>
+          <div style="font-size:13px; color:var(--text-light); margin-top:4px;">WhatsApp available on Sundays</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:0;">
+          <div class="nav-logo-icon">V</div>
+          <div class="nav-logo-text">Veer Global Education<span>MBBS Abroad Consultancy</span></div>
+        </div>
+        <p>We are dedicated to helping Indian students achieve their dream of becoming doctors through quality MBBS education at top universities abroad — with full transparency and no hidden costs.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#home">Home</a>
+        <a href="#why">Why Choose Us</a>
+        <a href="#countries">Countries</a>
+        <a href="#process">Admission Process</a>
+        <a href="#" onclick="handleApplyNowClick(); return false;">Apply Now</a>
+        <a href="#" onclick="openModal('login'); return false;">Login / Register</a>
+      </div>
+      <div class="footer-col">
+        <h4>Destinations</h4>
+        <a href="#countries">Russia</a>
+        <a href="#countries">Uzbekistan</a>
+        <a href="#countries">Kazakhstan</a>
+        <a href="#countries">Kyrgyzstan</a>
+        <a href="#countries">Georgia</a>
+        <a href="#countries">Philippines</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Veer Global Education. All Rights Reserved.</span>
+      <span>MBBS Abroad | NMC Approved Universities | Free Counselling</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Firebase SDK: keep these scripts before the main website script -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script>
+  let pendingAfterAuth = null;
+  let currentUserProfile = null;
+
+  /* ======================================================
+     FIREBASE SETUP
+     1) Create free project: https://console.firebase.google.com/
+     2) Enable Authentication > Email/Password and Google
+     3) Your Firebase config is already pasted below
+  ====================================================== */
+  const firebaseConfig = {
+    apiKey: "AIzaSyA4MqbBg71JbAJ-efdkeN2QNQNgB0U2ROo",
+    authDomain: "veer-global-education-b02f0.firebaseapp.com",
+    projectId: "veer-global-education-b02f0",
+    storageBucket: "veer-global-education-b02f0.firebasestorage.app",
+    messagingSenderId: "386189246628",
+    appId: "1:386189246628:web:a23a0b8c7b08a2a5692631"
+  };
+
+  let auth = null;
+
+  function isFirebaseConfigured() {
+    return firebaseConfig.apiKey && !firebaseConfig.apiKey.includes('PASTE_');
+  }
+
+  function initFirebase() {
+    if (!isFirebaseConfigured()) {
+      console.warn('Firebase config is missing. Paste your Firebase config first.');
+      return false;
+    }
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
+    auth = firebase.auth();
+    return true;
+  }
+
+  // ── Modal ──
+  function openModal(tab) {
+    document.getElementById('authModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    switchTab(tab || 'login');
+  }
+
+  function closeModal() {
+    document.getElementById('authModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('authModal')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── Tab switching ──
+  function switchTab(tab) {
+    const slider = document.getElementById('tabSlider');
+    const loginTab = document.getElementById('loginTab');
+    const registerTab = document.getElementById('registerTab');
+    const loginPanel = document.getElementById('loginPanel');
+    const registerPanel = document.getElementById('registerPanel');
+    const switchPrompt = document.getElementById('switchPrompt');
+
+    if (tab === 'login') {
+      slider.classList.remove('register');
+      loginTab.classList.add('active'); registerTab.classList.remove('active');
+      loginPanel.classList.add('active'); registerPanel.classList.remove('active');
+      switchPrompt.innerHTML = `Don't have an account? <button onclick="switchTab('register')">Register free</button>`;
+    } else {
+      slider.classList.add('register');
+      registerTab.classList.add('active'); loginTab.classList.remove('active');
+      registerPanel.classList.add('active'); loginPanel.classList.remove('active');
+      switchPrompt.innerHTML = `Already have an account? <button onclick="switchTab('login')">Sign in</button>`;
+    }
+  }
+
+  // ── Password toggle ──
+  function togglePwd(id, btn) {
+    const input = document.getElementById(id);
+    input.type = input.type === 'password' ? 'text' : 'password';
+    btn.textContent = input.type === 'password' ? '👁' : '🙈';
+  }
+
+  // ── Password strength ──
+  function checkStrength(val) {
+    const segs = [1,2,3,4].map(i => document.getElementById('seg' + i));
+    const label = document.getElementById('strengthLabel');
+    let score = 0;
+    if (val.length >= 8) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^A-Za-z0-9]/.test(val)) score++;
+    const colors = ['#e05555','#e8b84b','#1a4fa0','#2eb87e'];
+    const labels = ['Weak','Fair','Good','Strong'];
+    const labelColors = ['#e05555','#e8b84b','#6a8fc8','#2eb87e'];
+    segs.forEach((seg, i) => { seg.style.background = i < score ? colors[score-1] : 'rgba(255,255,255,0.07)'; });
+    if (val.length === 0) { label.textContent = 'Enter a password'; label.style.color = 'rgba(255,255,255,0.28)'; }
+    else { label.textContent = labels[score-1] || 'Too short'; label.style.color = score > 0 ? labelColors[score-1] : '#e05555'; }
+  }
+
+  // ── Toast ──
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = (isError ? '✗ ' : '✓ ') + msg;
+    t.className = 'toast' + (isError ? ' error' : '') + ' show';
+    setTimeout(() => t.classList.remove('show'), 3600);
+  }
+
+  // ── Loading ──
+  function setLoading(btnId, isLoading) {
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+    btn.classList.toggle('loading', isLoading);
+    btn.disabled = isLoading;
+  }
+
+  function showFirebaseMissing() {
+    showToast('Firebase config missing. Paste your Firebase config first.', true);
+  }
+
+  function getFirebaseErrorMessage(error) {
+    const code = error && error.code ? error.code : '';
+
+    if (code.includes('auth/user-not-found') || code.includes('auth/invalid-credential')) return 'Wrong email or password.';
+    if (code.includes('auth/wrong-password')) return 'Wrong password. Please try again.';
+    if (code.includes('auth/email-already-in-use')) return 'This email is already registered. Please login.';
+    if (code.includes('auth/weak-password')) return 'Password is too weak. Use at least 6 characters.';
+    if (code.includes('auth/invalid-email')) return 'Please enter a valid email address.';
+    if (code.includes('auth/popup-closed-by-user')) return 'Google sign in cancelled.';
+    if (code.includes('auth/unauthorized-domain')) return 'This domain is not allowed in Firebase Authentication.';
+
+    return error.message || 'Something went wrong. Please try again.';
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function getProfileStorageKey(firebaseUser) {
+    return firebaseUser ? 'veer_user_profile_' + firebaseUser.uid : 'veer_user_profile_unknown';
+  }
+
+  async function saveUserProfile(firebaseUser, extraData = {}) {
+    if (!firebaseUser) return;
+
+    const email = firebaseUser.email || extraData.email || '';
+    const nameFromGoogle = firebaseUser.displayName || '';
+    const nameParts = nameFromGoogle.split(' ');
+
+    const oldProfile = JSON.parse(localStorage.getItem(getProfileStorageKey(firebaseUser)) || '{}');
+
+    const profile = {
+      uid: firebaseUser.uid,
+      first: extraData.first || oldProfile.first || nameParts[0] || 'User',
+      last: extraData.last || oldProfile.last || nameParts.slice(1).join(' ') || '',
+      email: email,
+      phone: extraData.phone || oldProfile.phone || '',
+      provider: extraData.provider || oldProfile.provider || (firebaseUser.providerData[0] ? firebaseUser.providerData[0].providerId : 'password'),
+      updatedAt: new Date().toISOString()
+    };
+
+    localStorage.setItem(getProfileStorageKey(firebaseUser), JSON.stringify(profile));
+    currentUserProfile = profile;
+  }
+
+  async function loadUserProfile(firebaseUser) {
+    if (!firebaseUser) return null;
+
+    const savedProfile = JSON.parse(localStorage.getItem(getProfileStorageKey(firebaseUser)) || 'null');
+
+    if (savedProfile) {
+      currentUserProfile = savedProfile;
+      return currentUserProfile;
+    }
+
+    await saveUserProfile(firebaseUser, {});
+    return currentUserProfile;
+  }
+
+  // ── Show first email letter in navbar after login/register ──
+  function showUserLetter(email) {
+    const btn = document.getElementById('userAuthBtn');
+    const letter = (email || 'U').trim().charAt(0).toUpperCase();
+
+    btn.textContent = letter;
+    btn.classList.add('user-circle');
+    btn.title = 'View profile';
+    btn.onclick = function() {
+      showProfileDetails();
+    };
+  }
+
+  function resetAuthButton() {
+    const btn = document.getElementById('userAuthBtn');
+    btn.textContent = 'Login / Register';
+    btn.classList.remove('user-circle');
+    btn.title = '';
+    btn.onclick = function() { openModal('login'); };
+    const profileBox = document.getElementById('profileBox');
+    if (profileBox) profileBox.classList.remove('show');
+  }
+
+  async function getCurrentUserData() {
+    if (!auth || !auth.currentUser) return null;
+
+    if (currentUserProfile) return currentUserProfile;
+
+    try {
+      return await loadUserProfile(auth.currentUser);
+    } catch (error) {
+      console.error(error);
+      return {
+        first: auth.currentUser.displayName || 'User',
+        last: '',
+        email: auth.currentUser.email,
+        phone: ''
+      };
+    }
+  }
+
+  async function showProfileDetails() {
+    const user = await getCurrentUserData();
+
+    if (!user) {
+      resetAuthButton();
+      openModal('login');
+      return;
+    }
+
+    const fullName = `${user.first || ''} ${user.last || ''}`.trim() || 'User';
+    const email = user.email || (auth.currentUser ? auth.currentUser.email : '');
+    const letter = email.trim().charAt(0).toUpperCase();
+
+    document.getElementById('profileAvatar').textContent = letter;
+    document.getElementById('profileName').textContent = fullName;
+    document.getElementById('profileEmail').textContent = email;
+    document.getElementById('profilePhone').textContent = user.phone || '-';
+
+    const box = document.getElementById('profileBox');
+    box.classList.toggle('show');
+  }
+
+  function goToAdmission() {
+    const box = document.getElementById('profileBox');
+    if (box) box.classList.remove('show');
+    document.getElementById('admission').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  async function logoutUser() {
+    if (!auth) {
+      resetAuthButton();
+      return;
+    }
+
+    await auth.signOut();
+    currentUserProfile = null;
+    resetAuthButton();
+    showToast('Logged out successfully');
+  }
+
+  document.addEventListener('click', function(e) {
+    const box = document.getElementById('profileBox');
+    const btn = document.getElementById('userAuthBtn');
+    if (!box || !btn) return;
+
+    if (box.classList.contains('show') && !box.contains(e.target) && e.target !== btn) {
+      box.classList.remove('show');
+    }
+  });
+
+  function goToSectionAfterAuth(sectionId) {
+    pendingAfterAuth = sectionId;
+    openModal('register');
+    showToast('Please login or register first to continue.', true);
+  }
+
+  function finishAuthRedirect() {
+    const target = pendingAfterAuth;
+    pendingAfterAuth = null;
+
+    setTimeout(() => {
+      closeModal();
+      if (target) {
+        document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 700);
+  }
+
+  // ── Protected Apply Now / Counselling buttons ──
+  function handleApplyNowClick() {
+    if (!initFirebase()) {
+      showFirebaseMissing();
+      openModal('register');
+      return;
+    }
+
+    if (auth.currentUser) {
+      goToAdmission();
+    } else {
+      goToSectionAfterAuth('admission');
+    }
+  }
+
+  function handleCounsellingClick() {
+    handleApplyNowClick();
+  }
+
+  // ── Real Google Login using Firebase ──
+  async function handleGoogleLogin() {
+    if (!initFirebase()) {
+      showFirebaseMissing();
+      return;
+    }
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+
+    try {
+      const result = await auth.signInWithPopup(provider);
+      await saveUserProfile(result.user, { provider: 'google' });
+      showUserLetter(result.user.email);
+      showToast('Google sign in successful!');
+      finishAuthRedirect();
+    } catch (error) {
+      showToast(getFirebaseErrorMessage(error), true);
+    }
+  }
+
+  // ── Real Email/Password Login using Firebase ──
+  async function handleLogin() {
+    if (!initFirebase()) {
+      showFirebaseMissing();
+      return;
+    }
+
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    const password = document.getElementById('loginPassword').value;
+
+    if (!email || !password) { showToast('Please fill in all fields', true); return; }
+    if (!isValidEmail(email)) { showToast('Please enter a valid email', true); return; }
+
+    setLoading('loginBtn', true);
+
+    try {
+      const result = await auth.signInWithEmailAndPassword(email, password);
+      await loadUserProfile(result.user);
+      showUserLetter(result.user.email);
+      showToast('Signed in successfully! Welcome back.');
+      finishAuthRedirect();
+    } catch (error) {
+      showToast(getFirebaseErrorMessage(error), true);
+    } finally {
+      setLoading('loginBtn', false);
+    }
+  }
+
+  // ── Real Register using Firebase ──
+  async function handleRegister() {
+    if (!initFirebase()) {
+      showFirebaseMissing();
+      return;
+    }
+
+    const first = document.getElementById('regFirst').value.trim();
+    const last = document.getElementById('regLast').value.trim();
+    const email = document.getElementById('regEmail').value.trim().toLowerCase();
+    const phone = document.getElementById('regPhone').value.trim();
+    const password = document.getElementById('regPassword').value;
+    const terms = document.getElementById('termsCheck').checked;
+
+    if (!first || !last || !email || !phone || !password) { showToast('Please fill in all fields', true); return; }
+    if (!isValidEmail(email)) { showToast('Please enter a valid email', true); return; }
+    if (password.length < 8) { showToast('Password must be at least 8 characters', true); return; }
+    if (!terms) { showToast('Please accept the Terms & Conditions', true); return; }
+
+    setLoading('registerBtn', true);
+
+    try {
+      const result = await auth.createUserWithEmailAndPassword(email, password);
+      await result.user.updateProfile({ displayName: `${first} ${last}`.trim() });
+      await saveUserProfile(result.user, { first, last, email, phone, provider: 'password' });
+      showUserLetter(email);
+      showToast('Account created successfully!');
+      finishAuthRedirect();
+    } catch (error) {
+      showToast(getFirebaseErrorMessage(error), true);
+      if (error.code && error.code.includes('auth/email-already-in-use')) {
+        switchTab('login');
+        document.getElementById('loginEmail').value = email;
+      }
+    } finally {
+      setLoading('registerBtn', false);
+    }
+  }
+
+  // ── Keep user logged in after page refresh ──
+  window.addEventListener('DOMContentLoaded', () => {
+    if (!initFirebase()) {
+      resetAuthButton();
+      return;
+    }
+
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        try {
+          await loadUserProfile(user);
+        } catch (error) {
+          console.error(error);
+        }
+        showUserLetter(user.email || 'User');
+      } else {
+        currentUserProfile = null;
+        resetAuthButton();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
